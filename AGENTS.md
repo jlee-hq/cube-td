@@ -46,3 +46,7 @@ Web remake (single lane) of the WC3 map Cube Defense 5.2. Source data was decode
 - `phaser.html` - direct game entry, used for dev flags (`?demo`, `?demo=walk`, `&fit`).
 - `vanilla.html` / `src/vanilla/` - FROZEN. Keep it compiling; do not add features.
 - `npm run smoke -- <url> <out.png> <waitMs>` - real-click smoke test via Chrome DevTools Protocol (clicks Start, reports whether Phaser booted, saves a screenshot). Chrome CLI `--screenshot` mode stalls dynamic imports, so use this for the start flow.
+
+## Send next wave
+- `Game.sendNext()` / `canSendNext()` / `earlyCallReward()`: skips the countdown/break (solo pays `earlyCallGold` per 5 s skipped; original pays 0), or once all 10 creeps of the current wave have spawned, starts the next level immediately and pays that round's bonus up front (waves overlap). Panel button + `N` key.
+- Panel (`src/ui/panel.ts`) takes the art map to render tower/creep icons; sections re-render only when their HTML changes.

@@ -167,13 +167,14 @@ export interface Rules {
   airHpMul: number;
   startLives: number;
   startGoldBonus: number;
+  earlyCallGold: number;
   byDifficulty?: Partial<Record<DifficultyId, Partial<Omit<Rules, 'byDifficulty'>>>>;
 }
 
 export const RULES: Record<Mode, Rules> = {
-  original: { bountyMul: 1, roundBonusBase: ROUND_BONUS, roundBonusPerLevel: 0, hpMul: 1, airHpMul: 1, startLives: START_LIVES, startGoldBonus: 0 },
+  original: { bountyMul: 1, roundBonusBase: ROUND_BONUS, roundBonusPerLevel: 0, hpMul: 1, airHpMul: 1, startLives: START_LIVES, startGoldBonus: 0, earlyCallGold: 0 },
   solo: {
-    bountyMul: 1.5, roundBonusBase: 5, roundBonusPerLevel: 3, hpMul: 1, airHpMul: 0.6, startLives: 3, startGoldBonus: 10,
+    bountyMul: 1.5, roundBonusBase: 5, roundBonusPerLevel: 3, hpMul: 1, airHpMul: 0.6, startLives: 3, startGoldBonus: 10, earlyCallGold: 1,
     byDifficulty: {
       normal: { bountyMul: 1.25, roundBonusPerLevel: 2, airHpMul: 0.75 },
       hard: { bountyMul: 1.1, roundBonusPerLevel: 1, airHpMul: 0.85 },

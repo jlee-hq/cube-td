@@ -12,7 +12,7 @@ const ctrl = new Controller();
 const stage = document.getElementById('stage')!;
 const canvas = document.createElement('canvas');
 stage.prepend(canvas);
-mountPanel(ctrl, document.getElementById('panel')!, document.getElementById('overlay')!);
+mountPanel(ctrl, document.getElementById('panel')!, document.getElementById('overlay')!, art);
 applyDemo(ctrl);
 
 const W = ctrl.game.cols * PX;

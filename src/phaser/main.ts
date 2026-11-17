@@ -495,9 +495,9 @@ class LaneScene extends Phaser.Scene {
 
 async function boot() {
   const ctrl = new Controller();
-  mountPanel(ctrl, document.getElementById('panel')!, document.getElementById('overlay')!);
-  applyDemo(ctrl);
   const art = await loadArt();
+  mountPanel(ctrl, document.getElementById('panel')!, document.getElementById('overlay')!, art);
+  applyDemo(ctrl);
   const stage = document.getElementById('stage')!;
   new Phaser.Game({
     type: Phaser.AUTO,

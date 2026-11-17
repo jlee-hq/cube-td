@@ -115,6 +115,7 @@ export class Controller {
       case 'copter': if (g.buyCopter(arg as Exclude<Tier, 'basic'>)) this.sfx.play('unlock'); else this.flash(g.hasFacility ? 'Not enough gold' : 'Build a Construction Facility first'); break;
       case 'speed': this.speed = Number(arg); break;
       case 'pause': this.paused = !this.paused; break;
+      case 'next': if (!g.sendNext()) this.flash('Wait until the current wave has finished spawning'); break;
       case 'path': this.showPath = !this.showPath; break;
       case 'mute': this.sfx.toggleMute(); break;
       case 'restart': this.reset(); return;
@@ -137,6 +138,7 @@ export class Controller {
     else if (k === 's' && this.selectedId) this.action('sell');
     else if (k === 'p') this.action('path');
     else if (k === 'm') this.action('mute');
+    else if (k === 'n') this.action('next');
     else if (/^[1-6]$/.test(k)) {
       const id = BUILD_MENU[this.tab][Number(k) - 1];
       if (id) this.startPlacing(id);

@@ -122,5 +122,29 @@ describe('Game', () => {
     expect(solo.pathLength()).toBeGreaterThan(orig.pathLength() * 1.4);
     expect(solo.previewPath().some(([x, y]) => x < 30 * 64 && y > 70 * 64)).toBe(true);
   });
+
+  it('send next wave skips timers, pays the early-call bonus in solo, and overlaps once spawning is done', () => {
+    const g = new Game({ seed: 1, mode: 'solo' });
+    g.start('easy');
+    const gold = g.gold;
+    expect(g.earlyCallReward()).toBe(2);
+    expect(g.sendNext()).toBe(true);
+    expect(g.gold).toBe(gold + 2);
+    run(g, 1);
+    expect(g.phase).toBe('wave');
+    expect(g.canSendNext()).toBe(false);
+    expect(g.sendNext()).toBe(false);
+    g.lives = 99;
+    run(g, 52);
+    expect(g.spawned).toBe(10);
+    const before = g.gold;
+    expect(g.sendNext()).toBe(true);
+    expect(g.level).toBe(1);
+    expect(g.spawned).toBe(0);
+    expect(g.gold).toBe(before + 5);
+    const orig = new Game({ seed: 1 });
+    orig.start('easy');
+    expect(orig.earlyCallReward()).toBe(0);
+  });
 });
 

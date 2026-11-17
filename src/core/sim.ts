@@ -318,6 +318,36 @@ export class Game {
     }
   }
 
+  canSendNext(): boolean {
+    if (this.phase === 'countdown' || this.phase === 'break') return true;
+    return this.phase === 'wave' && this.spawned >= CREEPS_PER_WAVE && this.level < WAVES.length - 1;
+  }
+
+  earlyCallReward(): number {
+    if (this.phase !== 'countdown' && this.phase !== 'break') return 0;
+    return Math.floor(this.phaseTimer / 5) * this.rules.earlyCallGold;
+  }
+
+  sendNext(): boolean {
+    if (!this.canSendNext()) return false;
+    if (this.phase === 'wave') {
+      const bonus = this.roundBonus();
+      this.gold += bonus;
+      this.level++;
+      this.spawned = 0;
+      this.spawnTimer = SPAWN_INTERVAL;
+      this.log(`Sent level ${this.level + 1} early (+${bonus} round bonus): ${this.wave.name}${this.wave.air ? ' (air)' : ''}.`);
+    } else {
+      const reward = this.earlyCallReward();
+      if (reward > 0) {
+        this.gold += reward;
+        this.log(`Called the wave early. +${reward} gold.`);
+      }
+      this.phaseTimer = 0;
+    }
+    return true;
+  }
+
   private waveCleared() {
     if (this.level >= WAVES.length - 1) {
       this.phase = 'won';
