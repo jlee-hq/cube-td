@@ -1,0 +1,24 @@
+{
+  "name": "cube-td",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --exclude test/balance.test.ts",
+    "preview": "vite preview",
+    "balance": "vitest run test/balance.test.ts --silent=false",
+    "smoke": "node scripts/smoke-start.mjs"
+  },
+  "dependencies": {
+    "phaser": "4.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "typescript": "6.0.3",
+    "vite": "8.3.5",
+    "vitest": "5.0.5"
+  }
+}

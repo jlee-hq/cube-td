@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cube Defense</title>
+  </head>
+  <body>
+    <div id="start" class="start">
+      <canvas id="start-bg"></canvas>
+      <main class="start-card">
+        <p class="eyebrow">A maze tower defense</p>
+        <h1 class="title">CUBE<span>DEFENSE</span></h1>
+        <p class="tagline">Maze the creeps. Upgrade your towers. Survive 30 levels.</p>
+        <button id="start-btn" class="start-btn" autofocus>Start</button>
+        <p class="start-hint">Press <kbd>Enter</kbd> to start</p>
+        <details class="how">
+          <summary>How to play</summary>
+          <ul>
+            <li>Creeps walk from the purple portal to the red exit. Each one that escapes costs a life.</li>
+            <li>Towers block the path, so build a maze to keep creeps under fire for longer. You can't seal it completely.</li>
+            <li>Every 4th level is an air wave. Flyers ignore your maze and Ground towers can't hit them.</li>
+            <li>Upgrade towers to climb their tiers. A Construction Facility unlocks the Super and Advanced lines.</li>
+            <li>Keys: 1-6 build, U upgrade, S sell, Space pause, M mute, F full map. Wheel zooms, drag pans.</li>
+          </ul>
+        </details>
+        <p class="credit">Inspired by the classic Cube Defense map.</p>
+      </main>
+    </div>
+    <div id="app" hidden>
+      <div id="stage" class="fill"><div id="overlay"></div><div class="stage-hint">Wheel: zoom · Drag: pan · Arrows: scroll · F: full map</div></div>
+      <aside id="panel"></aside>
+    </div>
+    <script type="module" src="/src/start/main.ts"></script>
+  </body>
+</html>

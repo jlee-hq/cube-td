@@ -1,0 +1,4 @@
+node_modules
+dist
+balance*.log
+smoke*.png

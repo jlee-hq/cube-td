@@ -1,0 +1,13 @@
+<!doctype html><html><body style="margin:0;background:#2c3a2c"><canvas id="c" width="1400" height="900"></canvas>
+<script type="module">
+import { proceduralArt } from '/src/art/procedural.ts';
+const art = proceduralArt(); const ctx = document.getElementById('c').getContext('2d');
+ctx.font = '10px system-ui'; ctx.fillStyle = '#fff';
+let x = 10, y = 10;
+const put = (key, w, h) => { if (x + w > 1390) { x = 10; y += h + 18; } const img = art.get(key); if (img) { ctx.drawImage(img, x, y, w, h); ctx.fillText(key.split(':')[1], x, y + h + 11); } x += w + 10; };
+for (const k of art.keys()) if (k.startsWith('tower:')) { const s = art.get(k).width * 1.25; put(k, s, s); const t = art.get(k.replace('tower:', 'turret:')); if (t) { ctx.drawImage(t, x - s - 10, y, s, s); } }
+x = 10; y += 120;
+for (const k of art.keys()) if (k.startsWith('creep:')) put(k, 84, 84);
+x = 10; y += 110;
+for (const k of art.keys()) if (k.startsWith('proj:') || k.startsWith('portal:') || k.startsWith('fx:')) put(k, 64, 64);
+</script></body></html>
